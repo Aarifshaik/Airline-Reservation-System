@@ -4,17 +4,23 @@ import {AppBar,Toolbar,Typography,Tabs,Tab} from '@mui/material'
 import {NavLink} from 'react-router-dom'
 import Box from '@mui/material/Box'
 // import kllogo1 from '../images/klulogo.png'
+import AirplaneTicketIcon from '@mui/icons-material/AirplaneTicket';
 
 const Header = () => {
   const [value, setvalue] = useState()
   return (
     <div>
          <AppBar sx={{backgroundColor:'#ff'}} position='sticky'>
-         
-         <Box display="flex" alignItems="center" sx={{ position: 'absolute', top: 15, left: 15 }}>
+         <Typography> <AirplaneTicketIcon fontSize="large" /></Typography>
+         <Box display="flex" flexDirection="column" alignItems="center" sx={{ position: 'absolute', top: 15, left: 15 }}>
             {/* <Typography> <img src={kllogo1} alt="KLU Logo" width={50}></img></Typography> */}
+            
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Counselling System
+              A²erohive
+            </Typography>
+            {/* <Box m={1} /> */}
+            <Typography variant="h10" fontSize={10} component="div" sx={{ flexGrow: 1 }}>
+              Your Gateway to Elevated Adventures
             </Typography>
           </Box>
           <Toolbar  sx={{display: 'flex', justifyContent: 'center'}}>
