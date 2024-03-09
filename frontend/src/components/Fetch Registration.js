@@ -17,7 +17,8 @@ import FormControl from '@mui/material/FormControl';
 const FetchRegistration=()=> {   
     const [rows, setRows] = React.useState([]);
     const [formData, setFormData] = useState({
-      Name: '',
+      FName: '',
+      LName:'',
       Role: '',
       email: '',
       // password: ''
@@ -57,9 +58,25 @@ const FetchRegistration=()=> {
         
       { field: 'Sno', headerName: 'Sno.', width: 90 ,align:'center',headerAlign: 'center', },
       {
-        field: 'Name',
-        headerName: 'Name',
-        width: 180,
+        field: 'FName',
+        headerName: 'First Name',
+        width: 120,
+        editable: true,
+        align:'center',
+        headerAlign: 'center',
+      },
+      {
+        field: 'LName',
+        headerName: 'Last Name',
+        width: 120,
+        editable: true,
+        align:'center',
+        headerAlign: 'center',
+      },
+      {
+        field: 'Country',
+        headerName: 'Country',
+        width: 120,
         editable: true,
         align:'center',
         headerAlign: 'center',
@@ -67,7 +84,15 @@ const FetchRegistration=()=> {
       {
         field: 'Role',
         headerName: 'Role',
-        width: 150,
+        width: 90,
+        editable: true,
+        align:'center',
+        headerAlign: 'center',
+      },
+      {
+        field: 'Phone',
+        headerName: 'Phone No.',
+        width: 180,
         editable: true,
         align:'center',
         headerAlign: 'center',
@@ -76,7 +101,7 @@ const FetchRegistration=()=> {
         field: 'email',
         headerName: 'Email',
         type: 'number',
-        width: 220,
+        width: 200,
         editable: true,
         align:'center',
         headerAlign: 'center',
@@ -87,7 +112,7 @@ const FetchRegistration=()=> {
         headerName: 'Actions',
         align:'center',
         headerAlign: 'center',
-        width: 250,
+        width: 280,
         renderCell: (params) => (
           <div>
             <Button variant="contained" startIcon={<CloudUploadIcon />} onClick={() => updateData(params.row._id)}>
@@ -105,7 +130,7 @@ const FetchRegistration=()=> {
     
   return (
     <div style={{width:'100%' , height:'86vh'}}>
-      <Box sx={{ height: '82%', width: '60%',marginLeft:'20%',marginRight:'20%,',marginTop:'2%' }}>
+      <Box sx={{ height: '82%', width: '80%',marginLeft:'10%',marginRight:'10%,',marginTop:'2%' }}>
       <DataGrid
         rows={rows}
         columns={columns}

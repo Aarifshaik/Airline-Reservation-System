@@ -21,6 +21,12 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { MuiTelInput } from 'mui-tel-input'
+
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 
 function Copyright(props) {
@@ -43,22 +49,22 @@ const defaultTheme = createTheme();
 
 export default function SignUp() {
     const [Role, setRole] = React.useState('');
+    const [Phone, setPhone] = React.useState('')
     const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
     setRole(event.target.value);
   };
 
+  const handlePhoneChange = (newValue) => {
+    setPhone(newValue)
+  }
 
   const getRoleName = (role) => {
     switch(role) {
       case 10:
-        return "Student";
+        return "Customer";
       case 20:
-        return "Counsellor";
-      case 30:
-        return "Visitor";
-      case 40:
         return "Admin";
       default:
         return "";
@@ -79,14 +85,22 @@ const handleSubmit = (event) => {
     const data = new FormData(event.currentTarget);
     const Rolename = getRoleName(Role);
     console.log({
-        Name:data.get("Name"),
+        FName:data.get("FName"),
+        LName:data.get("LName"),
+        Country:data.get("Country"),
+        DOB:data.get("DOB"),
         Role:Rolename,
+        Phone:Phone,
         email: data.get('email'),
         password: data.get('password'),
     });
   axios.post('http://localhost:8080/register',{
-    Name:data.get("Name"),
+    FName:data.get("FName"),
+    LName:data.get("LName"),
+    Country:data.get("Country"),
+    DOB:data.get("DOB"),
     Role:Rolename,
+    Phone:Phone,
     email: data.get('email'),
     password: data.get('password'),
   }).then((response)=>{
@@ -114,8 +128,7 @@ const action = (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <br/>
-        <br/>
-        <br/>
+        
         <Box
           sx={{
             marginTop: 0,
@@ -135,11 +148,41 @@ const action = (
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="Name"
+                  name="FName"
                   required
                   fullWidth
-                  id="name"
-                  label="Name"
+                  id="Fname"
+                  label="Fisrt Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="LName"
+                  required
+                  fullWidth
+                  id="Lname"
+                  label="Last Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={12}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={['DatePicker']}>
+                  <DatePicker label="DOB" 
+                    sx={{width:'100%'}}/>
+                </DemoContainer>
+              </LocalizationProvider>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="Country"
+                  required
+                  fullWidth
+                  id="Country"
+                  label="Country"
                   autoFocus
                 />
               </Grid>
@@ -154,14 +197,23 @@ const action = (
                     label="Role"
                     onChange={handleChange}
                 >
-                    <MenuItem value={10}>Student</MenuItem>
-                    <MenuItem value={20}>Counsellor</MenuItem>
-                    <MenuItem value={30}>Visitor</MenuItem>
-                    <MenuItem value={40}>Admin</MenuItem>
+                    <MenuItem value={10}>Customer</MenuItem>
+                    <MenuItem value={20}>Admin</MenuItem>
+                    {/* <MenuItem value={30}>Visitor</MenuItem> */}
+                    {/* <MenuItem value={40}>Admin</MenuItem> */}
                 </Select>
                 </FormControl>
               </Grid>
-
+              
+              <Grid item xs={12} sm={20}>
+                <MuiTelInput 
+                  required
+                  defaultCountry="US"
+                  value={Phone}
+                  onChange={handlePhoneChange} 
+                  sx={{width:'100%'}}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required

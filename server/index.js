@@ -18,13 +18,18 @@ app.post('/register', async (req, res) => {
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       const user = {
-        Name: req.body.Name,
+        FName: req.body.FName,
+        LName: req.body.LName,
+        DOB:req.body.DOB,
+        Country:req.body.Country,
+        Phone:req.body.Phone,
         password: hashedPassword,
         email: req.body.email,
         Role: req.body.Role,
       };
       await col.insertOne(user);
       res.send("Data Received");
+      console.log(user);
     } catch {
       res.status(500).send("Error registering user");
     }
