@@ -15,25 +15,30 @@ const db = client.db('Airline')
 const col= db.collection('user_register')
 
 app.post('/register', async (req, res) => {
-    try {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
-      const user = {
-        FName: req.body.FName,
-        LName: req.body.LName,
-        DOB:req.body.DOB,
-        Country:req.body.Country,
-        Phone:req.body.Phone,
-        password: hashedPassword,
-        email: req.body.email,
-        Role: req.body.Role,
-      };
-      await col.insertOne(user);
-      res.send("Data Received");
-      console.log(user);
-    } catch {
-      res.status(500).send("Error registering user");
+  try {
+    const existingUser = await col.findOne({ email: req.body.email });
+    if (existingUser) {
+      res.send(400);
+      return;
     }
-  });
+
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const user = {
+      FName: req.body.FName,
+      LName: req.body.LName,
+      DOB:req.body.DOB,
+      Country:req.body.Country,
+      Phone:req.body.Phone,
+      password: hashedPassword,
+      email: req.body.email,
+      Role: req.body.Role,
+    };
+    await col.insertOne(user);
+    res.send("Data Received");
+  } catch {
+    res.status(500).send("Error registering user");
+  }
+});
 
 app.put('/users/:id', async (req, res) => {
     const { id } = req.params;
@@ -68,7 +73,7 @@ app.post('/login', async (req, res) => {
   const user = await col.findOne({ email: req.body.email });
   console.log(user);
   if (user && await bcrypt.compare(req.body.password, user.password)) {
-    res.send(user.Name);
+    res.send(user);
   } else {
     res.send(null);
   }

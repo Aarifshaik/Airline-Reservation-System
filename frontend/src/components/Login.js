@@ -44,9 +44,10 @@ export default function SignIn() {
       };
       const response = await axios.post('http://localhost:8080/login',formData);
       if (response.data) {
-        const username = response.data;
-        console.log(username);
-        navigate('/hello', { state: { username } });
+        console.log(response.data);
+        const username = response.data.FName;
+        const Role = response.data.Role;
+        navigate('/hello', { state: { username,Role } } );  
       }
       else{
         alert("Invalid Credentials");

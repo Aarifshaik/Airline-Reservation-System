@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom'
 import Box from '@mui/material/Box'
 import AirplaneTicketIcon from '@mui/icons-material/AirplaneTicket';
 
-const Header = () => {
+const UserHeader = () => {
   const [value, setvalue] = useState()
   return (
     <div>
@@ -27,12 +27,9 @@ const Header = () => {
             value={value} onChange={(e,val)=>setvalue(val)}>
             
             <Tab LinkComponent={NavLink} to='/flights' label='Flights'/>
-            <Tab LinkComponent={NavLink} to='/appointment' label='Schedule' />
-            {/* <Tab LinkComponent={NavLink} to='/visitor' label='Visitor' /> */}
+            <Tab LinkComponent={NavLink} to='/update-profile' label='UpdateProfile' />
             <Tab LinkComponent={NavLink} to='/Login ' label='Login' />
             <Tab LinkComponent={NavLink} to='/signup' label='Sign Up' />
-            {/* <Tab LinkComponent={NavLink} to='/contactus' label='Contact Us' /> */}
-            {/* <Tab LinkComponent={NavLink} to='/about' label='About' />  */}
             <Tab LinkComponent={NavLink} to='/fetchregistrations' label='Registrations' />
             
             
@@ -47,4 +44,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default UserHeader

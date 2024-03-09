@@ -12,18 +12,22 @@ import Login from './components/Login';
 // import ContactUs from './components/ContactUs';
 // import About from './components/About';
 import FetchRegistration from './components/Fetch Registration';
-// import Hello from './components/Hello';
+import MuiBar from './components/MuiBar';
+
+import Hello from './components/Hello';
 
 function App() {
   return <React.Fragment>
     <header>
-      <Header />
+      {/* <Header /> */}
+      <MuiBar />
     </header>
     <main>
       <Routes>
         <Route path="/" element={<Home />} exact/>
         <Route path="/signup" element={<Signup />} exact/>
         <Route path="/login" element={<Login />} exact/>
+        <Route path="/flights" element={<Home />} exact/>
         {/* <Route path="/appointment" element={<Appointment />} exact/> */}
         {/* <Route path="/counsellor" element={<Counsellor />} exact/> */}
         {/* <Route path="/visitor" element={<Visitor />} exact/> */}
@@ -31,7 +35,7 @@ function App() {
         
         {/* <Route path="/about" element={<About />} exact/> */}
         <Route path="/fetchregistrations" element={<FetchRegistration />} exact/>
-        {/* <Route path="/hello" element={<Hello />} exact/>   */}
+        <Route path="/hello" element={<Hello />} exact/>  
 
       </Routes>
     </main>
