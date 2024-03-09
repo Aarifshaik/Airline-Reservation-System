@@ -1,0 +1,7 @@
+Frontend
+npm i react
+npm i react-dom
+npm i react-router-dom
+
+Server
+npm i express cors bcrypt nodemon mongodb
