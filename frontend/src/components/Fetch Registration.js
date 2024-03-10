@@ -19,9 +19,8 @@ const FetchRegistration=()=> {
     const [formData, setFormData] = useState({
       FName: '',
       LName:'',
-      Role: '',
       email: '',
-      // password: ''
+      Phone: '',
     })
   
     const fetchData = async () => {
@@ -155,22 +154,10 @@ const FetchRegistration=()=> {
       autoComplete="off"
       marginLeft={'10%'}
       >
-      <TextField id="outlined-basic" label="Name" name='Name' variant="outlined" value={formData.Name} onChange={changeHandler} />
-      <FormControl variant="outlined">
-        <InputLabel >Role</InputLabel>
-          <Select
-            labelId="role-label"
-            value={formData.Role}
-            name='Role'
-            label="Role"
-            onChange={changeHandler}
-          >
-            <MenuItem value={"Student"}>Student</MenuItem>
-            <MenuItem value={"Counsellor"}>Counsellor</MenuItem>
-            <MenuItem value={"Visitor"}>Visitor</MenuItem>
-            <MenuItem value={"Admin"}>Admin</MenuItem>
-          </Select>
-      </FormControl>          
+      <TextField id="outlined-basic" label="First Name" name='FName' variant="outlined" value={formData.FName} onChange={changeHandler} />
+      <TextField id="outlined-basic" label="Last Name" name='LName' variant="outlined" value={formData.LName} onChange={changeHandler} />
+      <TextField id="outlined-basic" label="Phone" name='Phone' variant="outlined" value={formData.Phone} onChange={changeHandler} />
+                
       <TextField id="outlined-basic" label="Email" name='email' variant="outlined" value={formData.email} onChange={changeHandler} />
     </Box>
     </Box>

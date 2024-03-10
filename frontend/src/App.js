@@ -13,21 +13,38 @@ import Login from './components/Login';
 // import About from './components/About';
 import FetchRegistration from './components/Fetch Registration';
 import MuiBar from './components/MuiBar';
-
+import About from './components/About';
 import Hello from './components/Hello';
+import AddFlight from './components/AddFlight';
 
-function App() {
+function App({Role='Admin'}) {
+  const userRole = Role;
+  const isLoggedIn = false;
+  if(Role!=='Guest'){
+    const isLoggedIn = true;
+  }
+  console.log(userRole);
+  let header;
+  if (userRole === 'Admin') {
+    header = <Header />;
+  } else if (userRole === 'Customer') {
+    header = <MuiBar isLoggedIn={isLoggedIn}/>;
+  } else {
+    header = <MuiBar />;
+  }
+
   return <React.Fragment>
     <header>
-      {/* <Header /> */}
-      <MuiBar />
+      {header}
     </header>
     <main>
       <Routes>
-        <Route path="/" element={<Home />} exact/>
+        <Route path="/home" element={<Home />} exact/>
         <Route path="/signup" element={<Signup />} exact/>
+        <Route path="/" element={<Login />} exact/> 
         <Route path="/login" element={<Login />} exact/>
         <Route path="/flights" element={<Home />} exact/>
+        <Route path="/add_flight" element={<AddFlight />} exact/>
         {/* <Route path="/appointment" element={<Appointment />} exact/> */}
         {/* <Route path="/counsellor" element={<Counsellor />} exact/> */}
         {/* <Route path="/visitor" element={<Visitor />} exact/> */}
@@ -36,6 +53,7 @@ function App() {
         {/* <Route path="/about" element={<About />} exact/> */}
         <Route path="/fetchregistrations" element={<FetchRegistration />} exact/>
         <Route path="/hello" element={<Hello />} exact/>  
+        <Route path="/about" element={<About />} exact/>
 
       </Routes>
     </main>

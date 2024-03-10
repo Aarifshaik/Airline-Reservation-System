@@ -13,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 const db = client.db('Airline')
 const col= db.collection('user_register')
+const col2=db.collection('flight_register')
 
 app.post('/register', async (req, res) => {
   try {
@@ -40,18 +41,53 @@ app.post('/register', async (req, res) => {
   }
 });
 
+app.post('/flightregister', async (req, res) => {
+  try {
+    const flight = {
+      
+      fid: req.body.fid,
+      model:req.body.model,
+      Airine:req.body.Airline,
+      dest:req.body.dest,
+      dept: req.body.dept,
+      captain: req.body.captain,
+      occupancy: req.body.occupancy,
+    };
+    await col2.insertOne(flight);
+    res.send("Data Received");
+  } catch {
+    res.status(500).send("Error registering user");
+  }
+});
+
 app.put('/users/:id', async (req, res) => {
     const { id } = req.params;
-    const { Name, Role, email, password } = req.body;
+    const { FName,LName, email, Phone } = req.body;
   
     // Build the update query dynamically
     const updateQuery = { $set: {} };
-    if (Name) updateQuery.$set.Name = Name;
-    if (Role) updateQuery.$set.Role = Role;
+    if (FName) updateQuery.$set.Name = FName;
+    if (LName) updateQuery.$set.Role = LName;
     if (email) updateQuery.$set.email = email;
-    if (password) updateQuery.$set.password = password;
+    if (Phone) updateQuery.$set.Phone = Phone;
   
     const result = await col.updateOne({ _id: new ObjectId(id) }, updateQuery);
+    res.send('updated');
+  });
+
+
+  app.put('/flights/:id', async (req, res) => {
+    const { id } = req.params;
+    const { FName, LName, email, Phone } = req.body;
+  
+    // Build the update query dynamically
+    const updateQuery = { $set: {} };
+    if (FName) updateQuery.$set.FName = FName;
+    if (LName) updateQuery.$set.LName = LName;
+    if (email) updateQuery.$set.email = email;
+    if (Phone) updateQuery.$set.Phone = Phone;
+  
+    const result = await col2.updateOne({ _id: new ObjectId(id) }, updateQuery);
     res.send('updated');
   });
 
@@ -61,11 +97,23 @@ app.get('/retrieve',async (req,res)=>{
     res.send(result)
 })
 
+app.get('/retrieve_flight',async (req,res)=>{
+  const result = await col2.find().toArray()
+  console.log(result)
+  res.send(result)
+})
+
 
 app.delete('/users/:id', async (req,res)=>{ 
     const {id}= req.params 
     const result=await col.deleteOne({_id : new ObjectId(id)})  
     res.send('deleted')
+})
+
+app.delete('/flights/:id', async (req,res)=>{ 
+  const {id}= req.params 
+  const result=await col2.deleteOne({_id : new ObjectId(id)})  
+  res.send('deleted')
 })
 
 

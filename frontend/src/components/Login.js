@@ -14,6 +14,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+// import MuiBar from './MuiBar';
+import App from '../App';
 
 function Copyright(props) {
   return (
@@ -47,7 +49,12 @@ export default function SignIn() {
         console.log(response.data);
         const username = response.data.FName;
         const Role = response.data.Role;
-        navigate('/hello', { state: { username,Role } } );  
+        if (Role) {
+          <App Role={Role} />
+          navigate('/hello', { state: { username,Role } } );
+        }
+
+        navigate('/hello', { state: { username,Role } } );
       }
       else{
         alert("Invalid Credentials");

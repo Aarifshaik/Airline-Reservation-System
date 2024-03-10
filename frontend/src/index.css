@@ -5,8 +5,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: -o-repeating-linear-gradient(45deg, red, blue);
+  
+ 
 }
+
+.helloBackground {
+  background-image: url('air.jpg');
+  background-size: cover;
+  width: 100vw;
+  height: calc(100vh - 90px);
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

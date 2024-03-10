@@ -15,13 +15,17 @@ import MenuItem from '@mui/material/MenuItem';
 import AirplaneTicketIcon from '@mui/icons-material/AirplaneTicket';
 // import {NavLink} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-const pages = ['Login', 'Home', 'Signup'];
+const pages = ['Login', 'Home', 'Signup','About Us'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -42,11 +46,34 @@ function ResponsiveAppBar() {
       navigate('/signup');
     } else if (page === 'Home') {
       navigate('/hello');
+    } else if (page === 'About Us') {
+      navigate('/about');
     }
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleLogout = () => {
+    navigate('/login');
+    setIsLoggedIn(false);
+  };
+
+  const handleSetting = (setting) => {
+    if (setting === 'Logout') {
+      handleLogout();
+    }
+    else if (setting === 'Profile') {
+      navigate('/profile');
+    }
+    else if (setting === 'Account') {
+      navigate('/account');
+    }
+    else if (setting === 'Dashboard') {
+      navigate('/dashboard');
+    }
+    handleCloseUserMenu();
   };
 
   const handleCloseUserMenu = () => {
@@ -142,7 +169,7 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-
+          {isLoggedIn && (
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -166,12 +193,13 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={handleSetting(setting)}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

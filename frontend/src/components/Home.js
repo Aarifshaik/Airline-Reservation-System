@@ -21,11 +21,10 @@ const Home=()=> {
       LName:'',
       Role: '',
       email: '',
-      // password: ''
     })
   
     const fetchData = async () => {
-      const res=await axios.get('http://localhost:8080/retrieve');
+      const res=await axios.get('http://localhost:8080/retrieve_flight');
       const dataWithSno = res.data.map((item, index) => ({ ...item, Sno: index + 1 }));
         
           setRows(dataWithSno)
@@ -58,7 +57,7 @@ const Home=()=> {
         
       { field: 'Sno', headerName: 'Sno.', width: 90 ,align:'center',headerAlign: 'center', },
       {
-        field: 'Flight ID',
+        field: 'fid',
         headerName: 'Flight ID',
         width: 120,
         editable: true,
@@ -66,7 +65,7 @@ const Home=()=> {
         headerAlign: 'center',
       },
       {
-        field: 'Model',
+        field: 'model',
         headerName: 'Model',
         width: 120,
         editable: true,
@@ -74,7 +73,7 @@ const Home=()=> {
         headerAlign: 'center',
       },
       {
-        field: 'Airline',
+        field: 'Airine',
         headerName: 'Airline',
         width: 120,
         editable: true,
@@ -82,7 +81,7 @@ const Home=()=> {
         headerAlign: 'center',
       },
       {
-        field: 'Destination',
+        field: 'dest',
         headerName: 'Destination',
         width: 150,
         editable: true,
@@ -90,7 +89,7 @@ const Home=()=> {
         headerAlign: 'center',
       },
       {
-        field: 'Departure',
+        field: 'dept',
         headerName: 'Departure',
         width: 100,
         editable: true,
@@ -98,7 +97,7 @@ const Home=()=> {
         headerAlign: 'center',
       },
       {
-        field: 'Captain',
+        field: 'captain',
         headerName: 'Captain',
         type: 'number',
         width: 120,
@@ -107,7 +106,7 @@ const Home=()=> {
         headerAlign: 'center',
       },
       {
-        field: 'Occupancy',
+        field: 'occupancy',
         headerName: 'Occupancy',
         type: 'number',
         width: 100,

@@ -27,7 +27,7 @@ const Header = () => {
             value={value} onChange={(e,val)=>setvalue(val)}>
             
             <Tab LinkComponent={NavLink} to='/flights' label='Flights'/>
-            <Tab LinkComponent={NavLink} to='/appointment' label='Schedule' />
+            <Tab LinkComponent={NavLink} to='/add_flight' label='Add Flight' />
             {/* <Tab LinkComponent={NavLink} to='/visitor' label='Visitor' /> */}
             <Tab LinkComponent={NavLink} to='/Login ' label='Login' />
             <Tab LinkComponent={NavLink} to='/signup' label='Sign Up' />
