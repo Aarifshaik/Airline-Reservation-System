@@ -16,48 +16,74 @@ import MuiBar from './components/MuiBar';
 import About from './components/About';
 import Hello from './components/Hello';
 import AddFlight from './components/AddFlight';
+import Contact from './components/Contact'
+import Info from './components/Info'
 
-function App({Role='Admin'}) {
-  const userRole = Role;
-  const isLoggedIn = false;
-  if(Role!=='Guest'){
-    const isLoggedIn = true;
-  }
-  console.log(userRole);
-  let header;
-  if (userRole === 'Admin') {
-    header = <Header />;
-  } else if (userRole === 'Customer') {
-    header = <MuiBar isLoggedIn={isLoggedIn}/>;
-  } else {
-    header = <MuiBar />;
-  }
+import { Provider } from 'react-redux';
+import store from './components/Redux Store';
+import ReactDOM from 'react-dom';
 
-  return <React.Fragment>
-    <header>
-      {header}
-    </header>
-    <main>
-      <Routes>
-        <Route path="/home" element={<Home />} exact/>
-        <Route path="/signup" element={<Signup />} exact/>
-        <Route path="/" element={<Login />} exact/> 
-        <Route path="/login" element={<Login />} exact/>
-        <Route path="/flights" element={<Home />} exact/>
-        <Route path="/add_flight" element={<AddFlight />} exact/>
-        {/* <Route path="/appointment" element={<Appointment />} exact/> */}
-        {/* <Route path="/counsellor" element={<Counsellor />} exact/> */}
-        {/* <Route path="/visitor" element={<Visitor />} exact/> */}
-        {/* <Route path="/contactus" element={<ContactUs />} exact/> */}
+
+function App() {
+
+  return( 
+  // <React.Fragment>
+  //   <header>
+  //     {Header}
+  //   </header>
+  //   <main>
+  //     <Routes>
+  //       <Route path="/home" element={<Home />} exact/>
+  //       <Route path="/signup" element={<Signup />} exact/>
+  //       <Route path="/" element={<Login />} exact/> 
+  //       <Route path="/login" element={<Login />} exact/>
+  //       <Route path="/flights" element={<Home />} exact/>
+  //       <Route path="/add_flight" element={<AddFlight />} exact/>
+  //       {/* <Route path="/appointment" element={<Appointment />} exact/> */}
+  //       {/* <Route path="/counsellor" element={<Counsellor />} exact/> */}
+  //       {/* <Route path="/visitor" element={<Visitor />} exact/> */}
+  //       {/* <Route path="/contactus" element={<ContactUs />} exact/> */}
         
-        {/* <Route path="/about" element={<About />} exact/> */}
-        <Route path="/fetchregistrations" element={<FetchRegistration />} exact/>
-        <Route path="/hello" element={<Hello />} exact/>  
-        <Route path="/about" element={<About />} exact/>
+  //       {/* <Route path="/about" element={<About />} exact/> */}
+  //       <Route path="/fetchregistrations" element={<FetchRegistration />} exact/>
+  //       <Route path="/hello" element={<Hello />} exact/>  
+  //       <Route path="/about" element={<About />} exact/>
 
-      </Routes>
-    </main>
-    </React.Fragment>
+  //     </Routes>
+  //   </main>
+  //   </React.Fragment>
+
+  <Provider store={store}>
+  <React.Fragment>
+    <Header />
+    <main>
+       <Routes>
+         <Route path="/home" element={<Home />} exact/>
+         <Route path="/signup" element={<Signup />} exact/>
+         <Route path="/" element={<Login />} exact/> 
+         <Route path="/login" element={<Login />} exact/>
+         <Route path="/flights" element={<Home />} exact/>
+         <Route path="/add_flight" element={<AddFlight />} exact/>
+         {/* <Route path="/appointment" element={<Appointment />} exact/> */}
+         {/* <Route path="/counsellor" element={<Counsellor />} exact/> */}
+         {/* <Route path="/visitor" element={<Visitor />} exact/> */}
+
+         {/* <Route path="/contactus" element={<ContactUs />} exact/> */}
+         {/* <Route path="/about" element={<About />} exact/> */}
+         <Route path="/fetchregistrations" element={<FetchRegistration />} exact/>
+         <Route path="/hello" element={<Hello />} exact/>  
+         <Route path="/about" element={<About />} exact/>
+         <Route path='/contact' element={<Contact />} exact/>
+         <Route path='/info' element={<Info />} exact/>
+
+       </Routes>
+     </main>
+  </React.Fragment>
+</Provider>
+
+
+
+  );
 }
 
 export default App;

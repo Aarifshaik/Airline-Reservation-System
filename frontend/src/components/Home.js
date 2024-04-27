@@ -17,10 +17,10 @@ import FormControl from '@mui/material/FormControl';
 const Home=()=> {   
     const [rows, setRows] = React.useState([]);
     const [formData, setFormData] = useState({
-      FName: '',
-      LName:'',
-      Role: '',
-      email: '',
+      captain: '',
+      dest:'',
+      dept: '',
+      captain: '',
     })
   
     const fetchData = async () => {
@@ -38,14 +38,14 @@ const Home=()=> {
   
     const updateData = async (id) => {
       console.log(id)
-      const res = await axios.put(`http://localhost:8080/users/${id}`, formData)
+      const res = await axios.put(`http://localhost:8080/flights/${id}`, formData)
       fetchData()
       console.log(res.data)
     }
   
     const deleteData = async (id) => {
       console.log(id)
-      const res = await axios.delete(`http://localhost:8080/users/${id}`)
+      const res = await axios.delete(`http://localhost:8080/flights/${id}`)
       fetchData()
       console.log(res.data)
     }
@@ -163,23 +163,10 @@ const Home=()=> {
       autoComplete="off"
       marginLeft={'10%'}
       >
-      <TextField id="outlined-basic" label="Name" name='Name' variant="outlined" value={formData.Name} onChange={changeHandler} />
-      <FormControl variant="outlined">
-        <InputLabel >Role</InputLabel>
-          <Select
-            labelId="role-label"
-            value={formData.Role}
-            name='Role'
-            label="Role"
-            onChange={changeHandler}
-          >
-            <MenuItem value={"Student"}>Student</MenuItem>
-            <MenuItem value={"Counsellor"}>Counsellor</MenuItem>
-            <MenuItem value={"Visitor"}>Visitor</MenuItem>
-            <MenuItem value={"Admin"}>Admin</MenuItem>
-          </Select>
-      </FormControl>          
-      <TextField id="outlined-basic" label="Email" name='email' variant="outlined" value={formData.email} onChange={changeHandler} />
+      <TextField id="outlined-basic" label="Captain" name='captain' variant="outlined" value={formData.captain} onChange={changeHandler} />
+      <TextField id="outlined-basic" label="Destination" name='dest' variant="outlined" value={formData.dest} onChange={changeHandler} />      
+      <TextField id="outlined-basic" label="Airline" name='Airline' variant="outlined" value={formData.Airline} onChange={changeHandler} />      
+      <TextField id="outlined-basic" label="Departure" name='dept' variant="outlined" value={formData.dept} onChange={changeHandler} />
     </Box>
     </Box>
     </div>

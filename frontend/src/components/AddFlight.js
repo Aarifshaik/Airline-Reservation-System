@@ -205,7 +205,7 @@ const action = (
               <Grid item xs={12} sm={12}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DatePicker']}>
-                  <DatePicker label="DOB"
+                  <DatePicker label="Date"
                      
                     value={selectedDate}
                     onChange={handleDateChange}

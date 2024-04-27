@@ -15,6 +15,9 @@ const db = client.db('Airline')
 const col= db.collection('user_register')
 const col2=db.collection('flight_register')
 
+
+
+
 app.post('/register', async (req, res) => {
   try {
     const existingUser = await col.findOne({ email: req.body.email });
@@ -66,8 +69,8 @@ app.put('/users/:id', async (req, res) => {
   
     // Build the update query dynamically
     const updateQuery = { $set: {} };
-    if (FName) updateQuery.$set.Name = FName;
-    if (LName) updateQuery.$set.Role = LName;
+    if (FName) updateQuery.$set.FName = FName;
+    if (LName) updateQuery.$set.LName = LName;
     if (email) updateQuery.$set.email = email;
     if (Phone) updateQuery.$set.Phone = Phone;
   
@@ -78,14 +81,14 @@ app.put('/users/:id', async (req, res) => {
 
   app.put('/flights/:id', async (req, res) => {
     const { id } = req.params;
-    const { FName, LName, email, Phone } = req.body;
+    const { captain, dest, Airline, dept } = req.body;
   
     // Build the update query dynamically
     const updateQuery = { $set: {} };
-    if (FName) updateQuery.$set.FName = FName;
-    if (LName) updateQuery.$set.LName = LName;
-    if (email) updateQuery.$set.email = email;
-    if (Phone) updateQuery.$set.Phone = Phone;
+    if (captain) updateQuery.$set.captain = captain;
+    if (dest) updateQuery.$set.dest = dest;
+    if (Airline) updateQuery.$set.email = Airline;
+    if (dept) updateQuery.$set.dept = dept;
   
     const result = await col2.updateOne({ _id: new ObjectId(id) }, updateQuery);
     res.send('updated');
@@ -124,6 +127,27 @@ app.post('/login', async (req, res) => {
     res.send(user);
   } else {
     res.send(null);
+  }
+});
+
+
+
+app.post('/send-otp', async (req, res) => {
+  try {
+    const mobileNumber = req.body.mobileNumber;
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    const response = await axios.get('https://www.fast2sms.com/dev/bulk', {
+      params: {
+        authorization: process.env.FAST2SMS_API_KEY,
+        variables_values: `Your OTP is ${otp}`,
+        route: 'otp',
+        numbers: mobileNumber
+      }
+    });
+    res.json({ success: true, message: 'OTP sent successfully!' });
+  } catch (error) {
+    console.error('Error sending OTP:', error);
+    res.status(500).json({ success: false, message: 'Failed to send OTP.' });
   }
 });
 

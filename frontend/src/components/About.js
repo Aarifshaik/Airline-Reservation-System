@@ -27,7 +27,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignIn() {
+export default function About() {
 
   return (
     <div class="loginpage" style={{ 

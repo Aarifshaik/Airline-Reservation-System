@@ -16,6 +16,12 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 // import MuiBar from './MuiBar';
 import App from '../App';
+import aero from './aero.png'; 
+
+
+import { useDispatch } from 'react-redux';
+import { logIn } from './Redux Store';
+
 
 function Copyright(props) {
   return (
@@ -36,6 +42,8 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
 
   const handleSubmit =async (event) => {
     event.preventDefault();
@@ -49,6 +57,9 @@ export default function SignIn() {
         console.log(response.data);
         const username = response.data.FName;
         const Role = response.data.Role;
+        const isLoggedIn = true;
+        const role = Role;
+        dispatch(logIn({ role: Role }));
         if (Role) {
           <App Role={Role} />
           navigate('/hello', { state: { username,Role } } );
@@ -64,29 +75,37 @@ export default function SignIn() {
   }
 
   return (
-    <div class="loginpage" style={{ height: '90vh', width: '100vw' }}>
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <Box
-          sx={{
-            marginTop: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+    // <div class="loginpage" style={{ height: '90vh', width: '100vw' }}>
+    // <ThemeProvider theme={defaultTheme}>
+    //   <Container component="main" maxWidth="xs">
+    //     <CssBaseline />
+    //     <br/>
+    //     <br/>
+    //     <br/>
+    //     <br/>
+    //     <Box
+    //       sx={{
+    //         marginTop: 0,
+    //         display: 'flex',
+    //         flexDirection: 'column',
+    //         alignItems: 'center',
+    //       }}
+    //     >
+    //       <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+    //         <LockOutlinedIcon />
+    //       </Avatar>
+    
+    <Box sx={{ position: 'relative', width: '100%', height: '100vh' }}>
+      
+    <img src={aero} alt="Description" style={{ position: 'absolute',top:'12%', width: '60%', height: '60vh',objectFit:'cover' }} />
+    <Box sx={{ position: 'absolute', right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '80vh', width: '45%', margin: '0 0', mr: -8 }}>
+      <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        Sign in
+      </Typography>
+      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '50%' }}>
             <TextField
               margin="normal"
               required
@@ -132,10 +151,12 @@ export default function SignIn() {
               </Grid>
             </Grid>
           </Box>
+          </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
-    </div>
+      // </Box>
+      //  <Copyright sx={{ mt: 8, mb: 4 }} />
+      //</Container>
+   // </ThemeProvider>
+    //</div> }
   );
 }
